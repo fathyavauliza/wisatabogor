@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisata Bogor - Jelajahi Keindahan Kota Hujan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --secondary: #ff9800;
+            --dark: #1b5e20;
+            --light: #f1f8e9;
+            --gray: #757575;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        /* Destinasi Wisata */
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .destination-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .destination-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .destination-content {
+            padding: 1.5rem;
+        }
+
+        .destination-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            background-color: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-box h4 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rating {
+            color: #ffc107;
+            margin: 10px 0;
+        }
+
+        .review {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: var(--dark);
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        /* Galeri */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* About & Contact */
+        .about-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-box, .contact-box {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info {
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .destinations {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>Wisata Bogor</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#destinasi"><i class="fas fa-map-marker-alt"></i> Destinasi</a></li>
+                    <li><a href="#galeri"><i class="fas fa-images"></i> Galeri</a></li>
+                    <li><a href="#tips"><i class="fas fa-lightbulb"></i> Tips</a></li>
+                    <li><a href="#tentang"><i class="fas fa-info-circle"></i> Tentang Kami</a></li>
+                    <li><a href="#kontak"><i class="fas fa-phone-alt"></i> Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Jelajahi Keindahan Wisata Bogor</h1>
+            <p>Kota Bogor menawarkan berbagai destinasi menarik mulai dari kebun raya terbesar di Indonesia hingga wisata keluarga yang mengasyikkan. Temukan pengalaman tak terlupakan di Kota Hujan.</p>
+            <a href="#destinasi" style="background-color: var(--secondary); color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 1rem;">Jelajahi Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Destinasi Wisata -->
+    <section id="destinasi">
+        <div class="container">
+            <h2 class="section-title">Destinasi Wisata Bogor</h2>
+            <div class="destinations">
+                <!-- Kebun Raya Bogor -->
+                <div class="destination-card">
+                    <img src="KRB.jpeg" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>Kebun Raya Bogor</h3>
+                        <p class="price">Tiket: Rp 25.000 - Rp 50.000</p>
+                        <p>Didirikan tahun 1817 oleh pemerintah Belanda, Kebun Raya Bogor merupakan salah satu kebun botani tertua di Asia dengan koleksi lebih dari 15.000 jenis tumbuhan.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>08:00 - 16:00 (Setiap Hari)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Pagi hari atau saat musim kemarau</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.7/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Kebun yang sangat luas dan asri. Sangat cocok untuk bersantai bersama keluarga. Jangan lupa bawa payung karena Bogor sering hujan."</p>
+                            <div class="review-author">- Andi Pratama</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taman Safari Indonesia -->
+                <div class="destination-card">
+                    <img src="TS.webp" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>Taman Safari Indonesia</h3>
+                        <p class="price">Tiket: Rp 180.000 - Rp 250.000</p>
+                        <p>Taman konservasi seluas 170 hektar yang menjadi rumah bagi lebih dari 2.500 ekor satwa dari seluruh dunia. Pengunjung dapat berinteraksi langsung dengan satwa.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>09:00 - 17:00 (Weekend buka lebih lama)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Weekday pagi untuk hindari keramaian</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.2/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Pengalaman melihat satwa dari dekat yang sangat seru! Anak-anak sangat senang. Pastikan bawa makanan dari rumah karena harga di dalam agak mahal."</p>
+                            <div class="review-author">- Sari Dewi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Jungle Waterpark Bogor -->
+                <div class="destination-card">
+                    <img src="TJ.webp" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>The Jungle Waterpark Bogor</h3>
+                        <p class="price">Tiket: Rp 100.000 - Rp 150.000</p>
+                        <p>Waterpark bertema hutan tropis dengan berbagai wahana air yang menarik untuk semua usia. Dilengkapi dengan kolam ombak dan seluncuran yang menantang.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>09:00 - 18:00 (Tutup saat hujan deras)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Musim kemarau (Juni-September)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Wahana airnya seru dan bersih! Sangat recommended untuk keluarga dengan anak-anak. Taman bermainnya juga luas dan aman."</p>
+                            <div class="review-author">- Rudi Hartono</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Museum Zoologi -->
+                <div class="destination-card">
+                    <img src="MZ.webp" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>Museum Zoologi</h3>
+                        <p class="price">Tiket: Rp 15.000 - Rp 25.000</p>
+                        <p>Museum yang menyimpan koleksi spesimen fauna Indonesia, termasuk kerangka paus biru sepanjang 27 meter. Didirikan tahun 1894 untuk penelitian keanekaragaman hayati.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>08:00 - 16:00 (Senin-Jumat), 09:00 - 16:00 (Weekend)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Kapan saja, cocok untuk edukasi anak</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.0/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Tempat yang edukatif untuk mengenalkan anak pada keanekaragaman satwa Indonesia. Koleksinya lengkap dan informasinya jelas."</p>
+                            <div class="review-author">- Dr. Maya Sari</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Taman Bunga Nusantara -->
+                <div class="destination-card">
+                    <img src="TB.webp" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>Taman Bunga Nusantara</h3>
+                        <p class="price">Tiket: Rp 50.000 - Rp 75.000</p>
+                        <p>Taman seluas 35 hektar dengan koleksi bunga dari berbagai daerah di Indonesia dan dunia. Memiliki taman bertema seperti taman Perancis, Bali, dan Jepang.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>08:00 - 17:00 (Setiap Hari)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Musim semi (Agustus-September) saat bunga bermekaran</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.6/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Pemandangan bunga-bunga yang indah dan tertata rapi. Sangat cocok untuk berfoto. Area taman sangat luas, jadi siapkan tenaga ekstra!"</p>
+                            <div class="review-author">- Lisa Wijaya</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dairyland Riverside Puncak -->
+                <div class="destination-card">
+                    <img src="DRP.jpg" style="height: 250px; object-fit: cover;">
+                    <div class="destination-content">
+                        <h3>Dairyland Riverside Puncak</h3>
+                        <p class="price">Tiket: Rp 30.000 - Rp 60.000</p>
+                        <p>Wisata peternakan sapi perah dengan pemandangan sungai yang indah. Pengunjung dapat memberi makan sapi, memerah susu, dan menikmati produk olahan susu segar.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-box">
+                                <h4><i class="far fa-clock"></i> Jam Operasional</h4>
+                                <p>08:00 - 17:00 (Setiap Hari)</p>
+                            </div>
+                            <div class="info-box">
+                                <h4><i class="fas fa-sun"></i> Waktu Terbaik</h4>
+                                <p>Pagi hari saat cuaca cerah</p>
+                            </div>
+                        </div>
+                        
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.3/5</span>
+                        </div>
+                        
+                        <div class="review">
+                            <p>"Pengalaman unik memberi makan sapi dan memerah susu langsung. Anak-anak sangat antusias. Es krim susu segarnya wajib dicoba!"</p>
+                            <div class="review-author">- Budi Santoso</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Perjalanan -->
+    <section id="tips" style="background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Tips Perjalanan ke Bogor</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h4><i class="fas fa-umbrella"></i> Persiapan Cuaca</h4>
+                    <p>Bogor dikenal sebagai "Kota Hujan", jadi selalu bawa payung atau jas hujan. Waktu terbaik berkunjung adalah musim kemarau (Juni-September).</p>
+                </div>
+                <div class="info-box">
+                    <h4><i class="fas fa-car"></i> Transportasi</h4>
+                    <p>Gunakan kereta dari Jakarta untuk hindari macet. Di Bogor, sewa mobil/motor atau gunai transportasi online lebih praktis.</p>
+                </div>
+                <div class="info-box">
+                    <h4><i class="fas fa-utensils"></i> Kuliner Khas</h4>
+                    <p>Coba asinan bogor, soto mie, toge goreng, dan minuman bajigur. Untuk oleh-oleh, talas bogor adalah pilihan terbaik.</p>
+                </div>
+                <div class="info-box">
+                    <h4><i class="fas fa-camera"></i> Foto Terbaik</h4>
+                    <p>Waktu golden hour (jam 6-8 pagi dan 4-6 sore) memberikan pencahayaan terbaik untuk foto di destinasi wisata Bogor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Foto -->
+    <section id="galeri">
+        <div class="container">
+            <h2 class="section-title">Galeri Wisata Bogor</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="KRB.jpeg" style="height: 250px; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="TS.webp" style="height: 250px; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="TJ.webp" style="height: 250px; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="MZ.webp" style="height: 250px; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="TB.webp" style="height: 250px; object-fit: cover;">
+                </div>
+                <div class="gallery-item">
+                    <img src="DRP.jpg" style="height: 250px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami & Kontak -->
+    <section id="tentang" style="background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Tentang Kami & Kontak</h2>
+            <div class="about-contact">
+                <div class="about-box">
+                    <h3>Tentang Kami</h3>
+                    <p>WisataBogor.id adalah platform informasi lengkap tentang destinasi wisata di Kota Bogor dan sekitarnya. Kami berkomitmen untuk menyediakan informasi akurat dan terbaru untuk membantu pengunjung merencanakan perjalanan mereka.</p>
+                    <p>Tim kami terdiri dari para pecinta wisata yang telah menjelajahi setiap sudut Bogor dan ingin berbagi pengalaman dengan traveler lainnya.</p>
+                    <p>Misi kami adalah mempromosikan keindahan alam dan budaya Bogor serta meningkatkan kunjungan wisata ke kota ini.</p>
+                </div>
+                
+                <div class="contact-box" id="kontak">
+                    <h3>Kontak Kami</h3>
+                    <p>Ada pertanyaan tentang wisata di Bogor? Hubungi kami melalui informasi berikut:</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Alamat</h4>
+                                <p>Jl. Wisata Bogor No. 123, Bogor Tengah, Jawa Barat</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>Telepon</h4>
+                                <p>(0251) 8345-6789</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@wisatabogor.id</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Jam Operasional</h4>
+                                <p>Senin - Jumat: 09:00 - 17:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Wisata Bogor</h3>
+                    <p>Portal informasi wisata terlengkap di Kota Bogor. Temukan destinasi menarik, tips perjalanan, dan informasi terbaru untuk liburan Anda.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Destinasi Populer</h3>
+                    <p><a href="#destinasi" style="color: #ccc; text-decoration: none;">Kebun Raya Bogor</a></p>
+                    <p><a href="#destinasi" style="color: #ccc; text-decoration: none;">Taman Safari Indonesia</a></p>
+                    <p><a href="#destinasi" style="color: #ccc; text-decoration: none;">The Jungle Waterpark</a></p>
+                    <p><a href="#destinasi" style="color: #ccc; text-decoration: none;">Taman Bunga Nusantara</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Link Cepat</h3>
+                    <p><a href="#destinasi" style="color: #ccc; text-decoration: none;">Destinasi Wisata</a></p>
+                    <p><a href="#galeri" style="color: #ccc; text-decoration: none;">Galeri Foto</a></p>
+                    <p><a href="#tips" style="color: #ccc; text-decoration: none;">Tips Perjalanan</a></p>
+                    <p><a href="#kontak" style="color: #ccc; text-decoration: none;">Kontak Kami</a></p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 WisataBogor.id - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        menuToggle.addEventListener('click', () => {
+            mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    mainNav.style.display = 'none';
+                }
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Adjust navigation for mobile on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mainNav.style.display = '';
+            }
+        });
+    </script>
+</body>
+</html>
